@@ -14,9 +14,11 @@ The function below will fade a strip from off to pink over 15 minutes, then hold
 ```colorFade(255, 0, 0, 180, 900, 1800);```
 
 Followed by this function, the strip will fade from pink above to a pastel turquoise over 5 minutes, then hold for 30 minutes.
+
 ```colorFade(0, 255, 255, 90, 300, 1800);```
 
 Followed by this function, the strip will fade from pastel turquoise to black over 30 seconds.
+
 ```colorFade(0, 0, 0, 0, 30, 1);```
 
 ### doubleColorFade
@@ -27,7 +29,9 @@ The function below will transition the first half of the string from off to oran
 ```doubleColorFade(246, 106, 4, 20, 216, 218, 26, 0, 180, 300);``
 
 Followed by this function, the strip will fade from orange and turquoise above to a turquoise and yellow over 5 minutes, then hold for 5 minutes.
+
 ```doubleColorFade(56, 229, 158, 0, 216, 218, 26, 0, 300, 300);```
 
 Followed by this function, the strip will fade from pastel turquoise to black over 30 seconds.
+
 ```doubleColorFade(0, 0, 0, 0, 2, 1, 0, 0, 30, 1);```
