@@ -15,7 +15,6 @@ Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
 void setup () {
   pinMode(LED, OUTPUT);
-  
   strip.begin ();
   strip.show ();
   strip.setBrightness (255);
@@ -23,10 +22,10 @@ void setup () {
 
 void loop () {
 
-//initialize input states
+  //initialize input states
   buttonState = digitalRead(buttonPin);
 
-//Development button
+  //Development button
   if (buttonState == LOW) {
     if (ledState == 0) {
       runLED();
@@ -36,7 +35,7 @@ void loop () {
   }
 }
 
-// portable reset function 
+// reset function 
 int reset(){
   strip.clear();
 }
