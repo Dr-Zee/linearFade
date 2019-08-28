@@ -4,8 +4,6 @@
 */
 //NeoPixel setup
 const uint8_t LED = 9;
-uint8_t ledState = 0;
-
 #define LED_COUNT 20
 #define BRIGHTNESS 50
 #define LED_PIN LED
