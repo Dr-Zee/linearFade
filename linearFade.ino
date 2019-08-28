@@ -65,7 +65,7 @@ int runLED() {
  * colorFade(255, 0, 0, 180, 5, 40);
  */
  
-//voliatile ints to store color data between runs. More accurate than getPixelColor.
+//volatile ints to store color data between runs. More accurate than getPixelColor.
 volatile uint8_t curr_r = 0;
 volatile uint8_t curr_g = 0;
 volatile uint8_t curr_b = 0;
@@ -157,7 +157,7 @@ void colorFade(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint32_t d, uint32_t 
  * colorFade(255, 0, 0, 180, 213, 45, 234, 0, 5, 40);
  */
  
-//voliatile ints to store color data between runs. More accurate than getPixelColor.
+//volatile ints to store color data between runs. More accurate than getPixelColor.
 volatile uint8_t curr_r1 = 0;
 volatile uint8_t curr_g1 = 0;
 volatile uint8_t curr_b1 = 0;
