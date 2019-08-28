@@ -26,7 +26,7 @@ R, G, B, W, R2, G2, B2, W2, fade duration in seconds, time to hold on color in s
 Takes two R, G, B, W values, puts the first on the first half of the strip and the second on the second half. it then transitions each half between colors and holds for a predefined period.
 The function below will transition the first half of the string from off to orange, and the second half from off to turquoise. Both transitions will happen over 3 minutes and hold for 5.
 
-```doubleColorFade(246, 106, 4, 20, 216, 218, 26, 0, 180, 300);``
+```doubleColorFade(246, 106, 4, 20, 216, 218, 26, 0, 180, 300);```
 
 Followed by this function, the strip will fade from orange and turquoise above to a turquoise and yellow over 5 minutes, then hold for 5 minutes.
 
