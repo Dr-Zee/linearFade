@@ -1,5 +1,5 @@
-#Extremely Slow Linear Fade#
-##Arduino sketch For sk6812 RGBW NeoPixels##
+#Extremely Slow Linear Fade
+##Arduino sketch For sk6812 RGBW NeoPixels
 
 Requires the [Adafruit_NeoPixel library](https://github.com/adafruit/Adafruit_NeoPixel).
 
@@ -7,7 +7,7 @@ Two linear fade functions that interpolate steps between 2 colors over a predefi
 Made with the intention of creating extremely slow even linear fades over long periods of time.
 Functions are surprisingly accurate given that they're not using floats. a 15 minute transition will finish only off by 200-300 milliseconds. For my purposes this is a perfectly fine margin of error.
 
-###colorFade###
+###colorFade
 R, G, B, W, fade duration in seconds, time to hold on color in seconds.
 The function below will fade a strip from off to pink over 15 minutes, then hold on that color for 30 minutes.
 
@@ -19,7 +19,7 @@ Followed by this function, the strip will fade from pink above to a pastel turqu
 Followed by this function, the strip will fade from pastel turquoise to black over 30 seconds.
 `colorFade(0, 0, 0, 0, 30, 1);`
 
-###doubleColorFade###
+###doubleColorFade
 R, G, B, W, R2, G2, B2, W2, fade duration in seconds, time to hold on color in seconds.
 Takes two R, G, B, W values, puts the first on the first half of the strip and the second on the second half. it then transitions each half between colors and holds for a predefined period.
 The function below will transition the first half of the string from off to orange, and the second half from off to turquoise. Both transitions will happen over 3 minutes and hold for 5.
