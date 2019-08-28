@@ -9,7 +9,7 @@ Made with the intention of creating extremely slow even linear fades over long p
 
 Functions break out each rgbw value, compare with the previously set color, get the number of steps needed to transition each pixel, then get a step duration that will spread the steps evenly across the fade. Then on each step duration, the appropriate pixel value increments/decrements until all colors are reached by transition duration end.
 
-Functions are surprisingly accurate given that they're not using floats. a 15 minute transition will finish only off by 200-300 milliseconds. For my purposes this is a perfectly fine margin of error. 
+Functions are surprisingly accurate given that they're not using floats. A 15 minute transition will finish only off by 200-300 milliseconds. For my purposes this is a perfectly fine margin of error. 
 
 Also works for brief fade transitions but I haven't tested timing accuracy < 30 seconds.
 
