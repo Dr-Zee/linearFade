@@ -41,4 +41,4 @@ Followed by this function, the strip will fade from orange and turquoise above t
 
 Followed by this function, the strip will fade from turquoise and yellow to black over 30 seconds.
 
-```doubleColorFade(0, 0, 0, 0, 2, 1, 0, 0, 30, 1);```
+```doubleColorFade(0, 0, 0, 0, 0, 0, 0, 0, 30, 1);```
