@@ -13,6 +13,9 @@ Functions are surprisingly accurate given that they're not using floats. a 15 mi
 
 Also works for brief fade transitions but I haven't tested timing accuracy < 30 seconds.
 
+## Examples
+To run the included example, define your neopixel strip and pin in linearFade.h included in each example folder. Then save and upload to your Arduino.
+
 ### colorFade
 R, G, B, W, fade duration in seconds, time to hold on color in seconds.
 
