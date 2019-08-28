@@ -11,7 +11,7 @@ Functions break out each rgbw value, compare with the previously set color, get 
 
 Functions are surprisingly accurate given that they're not using floats. a 15 minute transition will finish only off by 200-300 milliseconds. For my purposes this is a perfectly fine margin of error. 
 
-Also works for brief transitions, but due to being int values, interpolation breaks down as the duration goes ~< 2-3 seconds. Transition still occurs, but if the duration steps are too small, the < 1 rounding errors compound and you get a very fast fade.
+Also works for brief fade transitions but I haven't tested timing accuracy > 30 seconds.
 
 ### colorFade
 R, G, B, W, fade duration in seconds, time to hold on color in seconds.
