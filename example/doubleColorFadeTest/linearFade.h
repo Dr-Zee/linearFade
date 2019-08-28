@@ -1,69 +1,24 @@
 #include <Adafruit_NeoPixel.h>
 
-//Development Button
-const uint8_t buttonPin = 3;
-uint8_t buttonState = 0;
-
+/**
+* Define Neopixel strip
+*/
 //NeoPixel setup
 const uint8_t LED = 9;
 uint8_t ledState = 0;
 
-#define LED_COUNT 19
+#define LED_COUNT 20
 #define BRIGHTNESS 50
 #define LED_PIN LED
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRBW + NEO_KHZ800);
 
-void setup () {
-  pinMode(LED, OUTPUT);
-  strip.begin ();
-  strip.show ();
-  strip.setBrightness (255);
-}
-
-void loop () {
-
-  //initialize input states
-  buttonState = digitalRead(buttonPin);
-
-  //Development button
-  if (buttonState == LOW) {
-    if (ledState == 0) {
-      runLED();
-    }
-  } else if (buttonState == HIGH) {
-    reset();
-  }
-}
-
-// reset function 
-int reset(){
-  strip.clear();
-}
-
-/**
-** LED function
-**/
-int runLED() {
-
-  ledState = 1;
-  
-  doubleColorFade(246, 106, 4, 20, 216, 218, 26, 0, 20, 20);
-  doubleColorFade(56, 229, 158, 0, 216, 218, 26, 0, 30, 20);
-  doubleColorFade(78, 6, 160, 0, 90, 30, 255, 0, 30, 20);
-  doubleColorFade(216, 218, 26, 0, 150, 30, 246, 106, 30, 20);
-  doubleColorFade(255, 0, 0, 120, 216, 218, 26, 0, 30, 20);
-  doubleColorFade(0, 0, 0, 0, 2, 1, 0, 0, 2, 1);
-  
-  ledState = 0;
-  
-}
 
 /**
  * ColorFade
  * Takes R, G, B, W, fade duration in seconds, time to hold on color in seconds.
  * colorFade(255, 0, 0, 180, 5, 40);
  */
- 
+
 //volatile ints to store color data between runs. More accurate than getPixelColor.
 volatile uint8_t curr_r = 0;
 volatile uint8_t curr_g = 0;
@@ -71,11 +26,11 @@ volatile uint8_t curr_b = 0;
 volatile uint8_t curr_w = 0;
 
 void colorFade(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint32_t d, uint32_t t) {
-  
+
   //convert seconds to milliseconds
   d = d * 1000;
   t = t * 1000;
-  
+
   unsigned long waitTimer = 0;
 
   //pixel timers
@@ -83,7 +38,7 @@ void colorFade(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint32_t d, uint32_t 
   uint32_t gPT = 0;
   uint32_t bPT = 0;
   uint32_t wPT = 0;
-  
+
   //rgbw steps
   uint32_t rS = 0;
   uint32_t gS = 0;
@@ -96,18 +51,18 @@ void colorFade(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint32_t d, uint32_t 
   if (b > curr_b) bS = d / (b - curr_b); else bS = d / (curr_b - b);
   if (w > curr_w) wS = d / (w - curr_w); else wS = d / (curr_w - w);
 
-  //if the old and new values are different  
+  //if the old and new values are different
   if((curr_r != r) || (curr_g != g) || (curr_b != b) || (curr_w != w)) {
-    
+
     //enter the transition loop
     while ((curr_r != r) || (curr_g != g) || (curr_b != b) || (curr_w != w)){
-      
+
       //if the elapsed time is greater than the step duration
       if (millis() - rPT >= rS) {
-        
+
         //increment or decrement the pixel value
         if (curr_r < r) curr_r++; else if (curr_r > r) curr_r--;
-        
+
         //and reset the pixel timer
         rPT = millis();
       }
@@ -123,7 +78,7 @@ void colorFade(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint32_t d, uint32_t 
         if (curr_w < w) curr_w++; else if (curr_w > w) curr_w--;
         wPT = millis();
       }
-      
+
       //Write to the strip
       for(int i=0; i<strip.numPixels(); i++) {
         strip.setPixelColor(i, strip.Color(strip.gamma8(curr_r), strip.gamma8(curr_g), strip.gamma8(curr_b), strip.gamma8(curr_w))); // Set white
@@ -131,7 +86,7 @@ void colorFade(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint32_t d, uint32_t 
       strip.show();
     }
   }
-  
+
   //if all the values match
   if ((curr_r == r) && (curr_g == g) && (curr_b == b) && (curr_w == w)) {
 
@@ -155,7 +110,7 @@ void colorFade(uint8_t r, uint8_t g, uint8_t b, uint8_t w, uint32_t d, uint32_t 
  * Takes R, G, B, W, R2, G2, B2, W2, fade duration in seconds, time to hold on color in seconds.
  * colorFade(255, 0, 0, 180, 213, 45, 234, 0, 5, 40);
  */
- 
+
 //volatile ints to store color data between runs. More accurate than getPixelColor.
 volatile uint8_t curr_r1 = 0;
 volatile uint8_t curr_g1 = 0;
@@ -168,7 +123,7 @@ volatile uint8_t curr_b2 = 0;
 volatile uint8_t curr_w2 = 0;
 
 void doubleColorFade(uint8_t r1, uint8_t g1, uint8_t b1, uint8_t w1, uint8_t r2, uint8_t g2, uint8_t b2, uint8_t w2, uint32_t d, uint32_t t) {
-  
+
   //convert seconds to milliseconds
   d = d * 1000;
   t = t * 1000;
@@ -177,25 +132,25 @@ void doubleColorFade(uint8_t r1, uint8_t g1, uint8_t b1, uint8_t w1, uint8_t r2,
   uint8_t halfStrip = strip.numPixels() / 2;
   uint8_t firstHalf = halfStrip;
   uint8_t lastHalf = halfStrip;
-  
+
   //if the led count is odd, give the extra pixel to the first half
   //flip if needed
   if ((halfStrip & 1) != 0) firstHalf += 1;
 
   unsigned long waitTimer1 = 0;
-  
+
   //First half rgbw pixel timers
   uint32_t rPT1 = 0;
   uint32_t gPT1 = 0;
   uint32_t bPT1 = 0;
   uint32_t wPT1 = 0;
-  
+
   //second half rgbw pixel timers
   uint32_t rPT2 = 0;
   uint32_t gPT2 = 0;
   uint32_t bPT2 = 0;
   uint32_t wPT2 = 0;
-  
+
   //first half rgbw steps
   uint32_t rS1 = 0;
   uint32_t gS1 = 0;
@@ -219,19 +174,19 @@ void doubleColorFade(uint8_t r1, uint8_t g1, uint8_t b1, uint8_t w1, uint8_t r2,
   if (g2 > curr_g2) gS2 = d / (g2 - curr_g2); else gS2 = d / (curr_g2 - g2);
   if (b2 > curr_b2) bS2 = d / (b2 - curr_b2); else bS2 = d / (curr_b2 - b2);
   if (w2 > curr_w2) wS2 = d / (w2 - curr_w2); else wS2 = d / (curr_w2 - w2);
-  
+
     //if the old and new values are different
    if((curr_r1 != r1) || (curr_g1 != g1) || (curr_b1 != b1) || (curr_w1 != w1) || (curr_r2 != r2) || (curr_g2 != g2) || (curr_b2 != b2) || (curr_w2 != w2)) {
-    
+
     //enter the transition loop
     while ((curr_r1 != r1) || (curr_g1 != g1) || (curr_b1 != b1) || (curr_w1 != w1) || (curr_r2 != r2) || (curr_g2 != g2) || (curr_b2 != b2) || (curr_w2 != w2)){
-      
+
       //if the elapsed time is greater than the step duration
       if (millis() - rPT1 >= rS1) {
-        
+
         //increment or decrement the pixel value
         if (curr_r1 < r1) curr_r1++; else if (curr_r1 > r1) curr_r1--;
-        
+
         //and reset the pixel timer
         rPT1 = millis();
       }
@@ -263,12 +218,12 @@ void doubleColorFade(uint8_t r1, uint8_t g1, uint8_t b1, uint8_t w1, uint8_t r2,
         if (curr_w2 < w2) curr_w2++; else if (curr_w2 > w2) curr_w2--;
         wPT2 = millis();
       }
-      
+
       //Write to the first half of the strip
       for(int i=0; i<firstHalf; i++) {
         strip.setPixelColor(i, strip.Color(strip.gamma8(curr_r1), strip.gamma8(curr_g1), strip.gamma8(curr_b1), strip.gamma8(curr_w1))); // Set white
       }
-      
+
       //Write to the second half of the strip
       for(int j=firstHalf; j<lastHalf + firstHalf; j++) {
         strip.setPixelColor(j, strip.Color(strip.gamma8(curr_r2), strip.gamma8(curr_g2), strip.gamma8(curr_b2), strip.gamma8(curr_w2))); // Set white
@@ -276,16 +231,16 @@ void doubleColorFade(uint8_t r1, uint8_t g1, uint8_t b1, uint8_t w1, uint8_t r2,
       strip.show();
     }
   }
-  
+
   //if all the values match
   if ((curr_r1 == r1) && (curr_g1 == g1) && (curr_b1 == b1) && (curr_w1 == w1) && (curr_r2 == r2) && (curr_g2 == g2) && (curr_b2 == b2) && (curr_w2 == w2)) {
-    
+
     //set the timer
     waitTimer1 = millis();
-    
+
     //and go into the hold loop
     while ((curr_r1 == r1) && (curr_g1 == g1) && (curr_b1 == b1) && (curr_w1 == w1) && (curr_r2 == r2) && (curr_g2 == g2) && (curr_b2 == b2) && (curr_w2 == w2)){
-      
+
       //if hold time isn't past, stay in loop
       if((millis() - waitTimer1) <= t) {
       } else {
