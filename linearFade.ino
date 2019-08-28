@@ -42,7 +42,7 @@ int reset(){
 }
 
 /**
-** Moon
+** LED function
 **/
 int runLED() {
 
